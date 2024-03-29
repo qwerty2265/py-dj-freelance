@@ -32,15 +32,15 @@ class Customer(UserProfile):
         )
         
 class Service(models.Model):
-    SERVICE_CHOICES = (
-        ("design", "Дизайн"),
-        ("development", "Разработка"),
-        ("support", "Поддержка"),
-    )
+    class ServicesType(models.TextChoices):
+        DESIGN = "design", "Дизайн"
+        DEVELOPMENT = "development", "Разработка"
+        SUPPORT = "support", "Поддержка"
+        
     executor = models.ForeignKey(Executor, on_delete=models.CASCADE, verbose_name="Исполнитель")
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name="Название")
     description = models.TextField(verbose_name="Описание")
-    service_type = models.CharField(max_length=11, choices=SERVICE_CHOICES, default="design", verbose_name="Тип услуги")
+    service_type = models.CharField(max_length=11, choices=ServicesType.choices, default="design", verbose_name="Тип услуги")
 
     def __str__(self):
         return self.name or "Неименованная услуга"
