@@ -1,9 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.validators import validate_slug
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Пользователь")
-    phone = models.CharField(max_length=12, blank=True, null=True, verbose_name="Телефон")
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name="Пользователь",
+        validators=[validate_slug],
+    )
+    phone = models.CharField(
+        max_length=12, blank=True, null=True, verbose_name="Телефон"
+    )
 
     def __str__(self):
         phone_display = self.phone if self.phone else "Нет телефона"
