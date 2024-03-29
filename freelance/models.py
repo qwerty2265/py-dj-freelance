@@ -50,15 +50,39 @@ class Service(models.Model):
         verbose_name_plural = "Услуги"
 
 class Order(models.Model):
-    service = models.OneToOneField(Service, on_delete=models.CASCADE, primary_key=True, verbose_name="Услуга")
-    order_type = models.CharField(max_length=11, choices=Service.SERVICE_CHOICES, default="design", verbose_name="Тип заказа")
+    order_type = models.CharField(
+        max_length=11,
+        choices=Service.ServicesType.choices,
+        default="design",
+        verbose_name="Тип заказа",
+    )
+
+    title = models.CharField(max_length=255, verbose_name="Заголовок")
+    description = models.TextField(verbose_name="Описание")
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name="Создан", null=True
+    )
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Обновлен", null=True)
+    price = models.DecimalField(
+        verbose_name="Стоимость", max_digits=10, decimal_places=2, default=0
+    )
+
+    customer = models.ForeignKey(
+        Customer,
+        on_delete=models.CASCADE,
+        related_name="orders",
+        blank=True,
+        null=True,
+        verbose_name="Заказчик",
+    )
 
     def __str__(self):
-        return self.service.name or "Неименованный заказ"
+        return self.title or self.description or "Неизвестный заказ"
 
     class Meta:
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
+
 
 class Tag(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name="tags", blank=True, null=True, verbose_name="Услуга")
