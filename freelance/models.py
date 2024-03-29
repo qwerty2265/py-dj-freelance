@@ -22,9 +22,15 @@ class Executor(UserProfile):
     pass
 
 class Customer(UserProfile):
-    # Реализуйте специфические поля/методы для Customer при необходимости
-    pass
+    # Пример специфического поля для Customer
+    preferences = models.TextField(blank=True, verbose_name="Предпочтения")
 
+    def __str__(self):
+        return (
+            super().__str__()
+            + f" - Предпочтения: {self.preferences if self.preferences else 'Не указаны'}"
+        )
+        
 class Service(models.Model):
     SERVICE_CHOICES = (
         ("design", "Дизайн"),
