@@ -98,3 +98,11 @@ class CustomerDetailView(DetailView):
         "freelance/customers/customer_detail.html"  # Укажите ваш путь к шаблону
     )
     context_object_name = "customer"
+
+class ServiceDetailView(DetailView):
+    model = Service
+    template_name = (
+        "freelance/services/service_detail.html"
+    )
+    context_object_name = "service"
+    
