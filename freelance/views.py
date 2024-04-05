@@ -77,4 +77,10 @@ class ExecutorListView(ListView):
         "freelance/executors/executor_list.html"  # Укажите ваш путь к шаблону
     )
     context_object_name = "executors"
-
+    
+class ExecutorDetailView(DetailView):
+    model = Executor
+    template_name = (
+        "freelance/executors/executor_detail.html"  # Укажите ваш путь к шаблону
+    )
+    context_object_name = "executor"
