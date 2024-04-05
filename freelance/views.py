@@ -84,3 +84,10 @@ class ExecutorDetailView(DetailView):
         "freelance/executors/executor_detail.html"  # Укажите ваш путь к шаблону
     )
     context_object_name = "executor"
+    
+class CustomerListView(ListView):
+    model = Customer
+    template_name = (
+        "freelance/customers/customer_list.html"  # Укажите ваш путь к шаблону
+    )
+    context_object_name = "customers"
