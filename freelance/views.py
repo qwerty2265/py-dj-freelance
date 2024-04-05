@@ -99,6 +99,11 @@ class CustomerDetailView(DetailView):
     )
     context_object_name = "customer"
 
+class ServiceListView(ListView):
+    model = Service
+    template_name = "freelance/services/service_list.html"
+    context_object_name = "services"
+
 class ServiceDetailView(DetailView):
     model = Service
     template_name = (
