@@ -70,3 +70,11 @@ class OrderEditView(LoginRequiredMixin, UpdateView):
         )
         form.instance.customer = customer_profile
         return super().form_valid(form)
+    
+class ExecutorListView(ListView):
+    model = Executor
+    template_name = (
+        "freelance/executors/executor_list.html"  # Укажите ваш путь к шаблону
+    )
+    context_object_name = "executors"
+
