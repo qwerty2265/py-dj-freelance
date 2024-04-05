@@ -110,4 +110,8 @@ class OrderListView(ListView):
     model = Order
     template_name = "freelance/orders/order_list.html"
     context_object_name = "orders"    
-    
+
+class OrderDetailView(DetailView):
+    model = Order
+    template_name = "freelance/orders/order_detail.html"
+    context_object_name = "order"
