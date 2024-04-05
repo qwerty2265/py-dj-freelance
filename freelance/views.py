@@ -91,3 +91,10 @@ class CustomerListView(ListView):
         "freelance/customers/customer_list.html"  # Укажите ваш путь к шаблону
     )
     context_object_name = "customers"
+
+class CustomerDetailView(DetailView):
+    model = Customer
+    template_name = (
+        "freelance/customers/customer_detail.html"  # Укажите ваш путь к шаблону
+    )
+    context_object_name = "customer"
