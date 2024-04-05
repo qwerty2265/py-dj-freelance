@@ -106,3 +106,8 @@ class ServiceDetailView(DetailView):
     )
     context_object_name = "service"
     
+class OrderListView(ListView):
+    model = Order
+    template_name = "freelance/orders/order_list.html"
+    context_object_name = "orders"    
+    
