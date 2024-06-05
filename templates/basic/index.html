@@ -1,5 +1,19 @@
 {% extends 'basic/base.html' %}
-{% block content %}
-<h2>{{ message }}</h2>
-{% endblock %}
 
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<h1>Запросы</h1>
+<div class="order-requests">
+    {% if order_requests %}
+        {% for request in order_requests %}
+            <div class="order-request">
+                <p>Заказ: {{ request.order.title }}</p>
+                <p>Статус: {{ request.get_status_display }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Нет запросов со статусом "В ожидании" или "Отклонено".</p>
+    {% endif %}
+</div>
+{% endblock %}

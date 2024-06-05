@@ -11,7 +11,7 @@ from django.contrib.auth.views import LogoutView
 from django.urls import reverse_lazy
 
 from freelance.forms import OrderForm
-from .models import Service, Order, Executor, Customer
+from .models import Service, Order, Executor, Customer, OrderRequest
 
 class CustomLogoutView(LogoutView):
     next_page = reverse_lazy("login")
@@ -22,6 +22,7 @@ class MainPageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["message"] = "Это главная страница проекта"
+        context["order_requests"] = OrderRequest.objects.filter(status__in=['pending', 'rejected'])
         return context
     
 class OrderCreateView(LoginRequiredMixin, CreateView):
