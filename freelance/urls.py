@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import (
     CustomLogoutView,
     MainPageView,
@@ -42,4 +42,6 @@ urlpatterns = [
     path("orders/<int:pk>", OrderDetailView.as_view(), name="order-detail"),
     path("orders/request/<int:pk>", OrderRequestView.as_view(), name="order-request"),
     path("orders/success/", OrderListView.as_view() , name="order-success"),
+    
+    path('ratings/', include('ratings.urls')),
 ]
