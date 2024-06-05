@@ -4,16 +4,19 @@
 
 {% block content %}
 <h1>Список Заказов</h1>
-<div templates/freelance/orders/order_list.htmlclass="orders">
-    {% for order in orders %}
-    <div class="order">
-
-        <div>
-            <a class="btn btn-info" href="{% url 'freelance:order-detail' order.pk %}">{{ order.title }}</a>
-        </div>
-        <p>{{ order.service.description }}</p>
-        <p>Тип заказа: {{ order.get_order_type_display }}</p>
-    </div>
-    {% endfor %}
+<div class="orders">
+    {% if orders %}
+        {% for order in orders %}
+            <div class="order">
+                <div>
+                    <a class="btn btn-info" href="{% url 'freelance:order-detail' order.pk %}">{{ order.title }}</a>
+                </div>
+                <p>{{ order.service.description }}</p>
+                <p>Тип заказа: {{ order.get_order_type_display }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Заказов нет.</p>
+    {% endif %}
 </div>
 {% endblock %}
