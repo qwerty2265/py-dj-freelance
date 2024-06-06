@@ -1,28 +1,23 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, CreateView, UpdateView
 from .models import Service
 from .forms import ServiceForm
 
-def service_list(request):
-    services = Service.objects.all()
-    return render(request, 'services/service_list.html', {'services': services, 'title': 'Список услуг'})
+class ServiceListView(ListView):
+    model = Service
+    template_name = 'services/service_list.html'
+    context_object_name = 'services'
+    extra_context = {'title': 'Список услуг'}
 
-def service_create(request):
-    if request.method == "POST":
-        form = ServiceForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('service_list')
-    else:
-        form = ServiceForm()
-    return render(request, 'services/service_form.html', {'form': form, 'title': 'Создание услуги'})
+class ServiceCreateView(CreateView):
+    model = Service
+    form_class = ServiceForm
+    template_name = 'services/service_form.html'
+    extra_context = {'title': 'Создание услуги'}
+    success_url = '/services/'
 
-def service_edit(request, pk):
-    service = get_object_or_404(Service, pk=pk)
-    if request.method == "POST":
-        form = ServiceForm(request.POST, request.FILES, instance=service)
-        if form.is_valid():
-            form.save()
-            return redirect('service_list')
-    else:
-        form = ServiceForm(instance=service)
-    return render(request, 'services/service_form.html', {'form': form, 'title': 'Редактирование услуги'})
+class ServiceUpdateView(UpdateView):
+    model = Service
+    form_class = ServiceForm
+    template_name = 'services/service_form.html'
+    extra_context = {'title': 'Редактирование услуги'}
+    success_url = '/services/'
