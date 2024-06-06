@@ -1,13 +1,28 @@
 {% extends 'basic/base.html' %}
 
-{% block title %}Детали услуги: {{ service.name }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<h1>{{ service.name }}</h1>
-<p>{{ service.description }}</p>
-<div>
-    <p>Тип услуги: {{ service.get_service_type_display }}</p>
-</div>
-<p>Стоимость услуги: {{ service.price }}</p>
-<!-- Добавьте другие детали услуги по мере необходимости -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card my-4">
+                    <div class="card-header">
+                        <h1 class="text-center">{{ service.title }}</h1>
+                    </div>
+                    <div class="card-body">
+                        <p>{{ service.description }}</p>
+                        {% if service.image %}
+                            <img src="{{ service.image.url }}" alt="{{ service.title }}" class="img-fluid">
+                        {% endif %}
+                        <p><strong>Создано:</strong> {{ service.created }}</p>
+                        <p><strong>Обновлено:</strong> {{ service.updated }}</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{% url 'service_list' %}" class="btn btn-primary">Вернуться к списку услуг</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
