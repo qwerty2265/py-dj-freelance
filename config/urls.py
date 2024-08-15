@@ -30,6 +30,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('register/', RegisterView.as_view(), name='register'),
+    path('', include('mainpage.urls')),
     # path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     DEBUG_TOOLBAR_PATH, 
 ]
